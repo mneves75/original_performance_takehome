@@ -9,3 +9,4 @@
 - Updated perf_takehome.do_kernel_test to run Machine with KERNEL_CORES for core-count consistency.
 - Ran `python tests/submission_tests.py -q` again after core-count alignment (617 cycles, all tests passed).
 - Ran `python -m py_compile perf_takehome.py tests/submission_tests.py frozen_problem.py`.
+- Added EXPLANATION.md with a junior-friendly project and change overview.
