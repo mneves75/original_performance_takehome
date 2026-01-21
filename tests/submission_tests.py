@@ -33,16 +33,18 @@ def do_kernel_test(forest_height: int, rounds: int, batch_size: int):
     forest = Tree.generate(forest_height)
     inp = Input.generate(forest, batch_size, rounds)
     mem = build_mem_image(forest, inp)
+    mem_machine = list(mem)
+    mem_ref = list(mem)
 
     kb = kernel_builder(forest.height, len(forest.values), len(inp.indices), rounds)
     # print(kb.instrs)
 
-    machine = Machine(mem, kb.instrs, kb.debug_info(), n_cores=N_CORES)
+    machine = Machine(mem_machine, kb.instrs, kb.debug_info(), n_cores=N_CORES)
     machine.enable_pause = False
     machine.enable_debug = False
     machine.run()
 
-    for ref_mem in reference_kernel2(mem):
+    for ref_mem in reference_kernel2(mem_ref):
         pass
 
     inp_values_p = ref_mem[6]
